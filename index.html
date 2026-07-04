@@ -18,8 +18,15 @@
 
     <div id="tela-login" class="fixed inset-0 bg-teal-800 flex flex-col justify-center items-center z-50 p-4">
         <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-md w-full text-center border-t-8 border-orange-500">
-            <h1 class="text-3xl font-black text-teal-800 mb-2">✨ IncluiSaber</h1>
-            <p class="text-slate-500 font-medium mb-6">Plataforma Educacional Inclusiva</p>
+            <div class="flex items-center justify-center gap-2 mb-2 select-none">
+                <div class="bg-gradient-to-tr from-teal-600 to-orange-400 text-white w-12 h-12 rounded-2xl flex items-center justify-center font-black text-2xl shadow-md transform rotate-3">
+                    iS
+                </div>
+                <h1 class="text-3xl font-black tracking-tight text-teal-800">
+                    Inclui<span class="text-orange-500">Saber</span>
+                </h1>
+            </div>
+            <p class="text-slate-500 font-medium mb-6 text-sm">Plataforma Educacional Inclusiva</p>
             
             <div class="text-left mb-4">
                 <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1">Nome do Aluno:</label>
@@ -76,7 +83,14 @@
 
     <div id="conteudo-principal" class="hidden flex-1 flex flex-col">
         <header class="bg-teal-800 text-white p-4 shadow-md flex justify-between items-center">
-            <h1 class="text-lg font-black tracking-wide flex items-center gap-2">🏫 IncluiSaber</h1>
+            <div class="flex items-center gap-2 select-none">
+                <div class="bg-white text-teal-800 w-8 h-8 rounded-lg flex items-center justify-center font-black text-sm shadow transform rotate-3">
+                    iS
+                </div>
+                <h1 class="text-xl font-black tracking-tight text-white">
+                    Inclui<span class="text-orange-400">Saber</span>
+                </h1>
+            </div>
             <div class="flex items-center gap-3">
                 <button onclick="toggleModoClean()" class="bg-orange-500 hover:bg-orange-600 font-extrabold py-1.5 px-3 rounded-full text-xs shadow transition flex items-center gap-1.5">
                     🧩 <span id="btn-texto-tea">Ativar Modo Clean (TEA)</span>
@@ -133,20 +147,31 @@
     <script>
         const letrasLetras = ["A", "B", "C", "D", "E", "F", "G", "H"];
 
+        // BANCO DE ATIVIDADES RECHEADO COM MUITO MAIS QUESTÕES COGNITIVAS
         const atividadesPadrao = {
             alfabetizacao: [
                 { dica: "⚽", exibicao: "B _ L A", certa: "O", opcoes: ["A", "O", "E"], enunciado: "Complete a palavra Bola com a vogal correta:", layout: "alfabetizacao" },
                 { dica: "🐱", exibicao: "G _ T O", certa: "A", opcoes: ["A", "I", "U"], enunciado: "Qual letra falta na palavra Gato?", layout: "alfabetizacao" },
                 { dica: "☀️", exibicao: "S _ L", certa: "O", opcoes: ["E", "O", "A"], enunciado: "Complete a palavra Sol:", layout: "alfabetizacao" },
                 { dica: "🚗", exibicao: "C _ R R O", certa: "A", opcoes: ["E", "U", "A"], enunciado: "Identifique a letra que falta na palavra Carro:", layout: "alfabetizacao" },
-                { dica: "🏠", exibicao: "C _ S A", certa: "A", opcoes: ["O", "E", "A"], enunciado: "Qual a vogal correta para a palavra Casa?", layout: "alfabetizacao" }
+                { dica: "🏠", exibicao: "C _ S A", certa: "A", opcoes: ["O", "E", "A"], enunciado: "Qual a vogal correta para a palavra Casa?", layout: "alfabetizacao" },
+                { dica: "🍌", exibicao: "B A N A N _", certa: "A", opcoes: ["E", "O", "A"], enunciado: "Qual a última letra da palavra Banana?", layout: "alfabetizacao" },
+                { dica: "🥛", exibicao: "L _ I T E", certa: "E", opcoes: ["A", "E", "O"], enunciado: "Complete a palavra Leite:", layout: "alfabetizacao" },
+                { dica: "🍇", exibicao: "U V _", certa: "A", opcoes: ["I", "U", "A"], enunciado: "Qual letra completa a palavra Uva?", layout: "alfabetizacao" },
+                { dica: "🦉", exibicao: "C O R _ J A", certa: "U", opcoes: ["A", "U", "O"], enunciado: "Qual vogal falta na palavra Coruja?", layout: "alfabetizacao" },
+                { dica: "🐟", exibicao: "P _ I X E", certa: "E", opcoes: ["A", "O", "E"], enunciado: "Complete a palavra Peixe com a vogal correta:", layout: "alfabetizacao" }
             ],
             anosIniciais: [
                 { pergunta: "Qual palavra está escrita de forma correta?", certa: "Cachorro", opcoes: ["Xaxorro", "Cachorro", "Cassorro"], enunciado: "Ortografia básica:", layout: "comum" },
                 { texto: "Mariana tinha 12 maçãs. Ela comeu 4.", pergunta: "Com quantas maçãs Mariana ficou?", certa: "8", opcoes: ["6", "8", "9"], enunciado: "Resolva a subtração:", layout: "comum" },
                 { pergunta: "Qual é o antônimo da palavra 'Alto'?", certa: "Baixo", opcoes: ["Grande", "Baixo", "Largo"], enunciado: "Sinônimos e Antônimos:", layout: "comum" },
                 { pergunta: "Quanto é 5 vezes 4?", certa: "20", opcoes: ["15", "20", "25"], enunciado: "Multiplicação fundamental:", layout: "comum" },
-                { texto: "O Sol nasce no leste e se põe no oeste.", pergunta: "Em qual ponto cardeal o Sol nasce?", certa: "Leste", opcoes: ["Leste", "Oeste", "Norte"], enunciado: "Ciências da Natureza:", layout: "comum" }
+                { texto: "O Sol nasce no leste e se põe no oeste.", pergunta: "Em qual ponto cardeal o Sol nasce?", certa: "Leste", opcoes: ["Leste", "Oeste", "Norte"], enunciado: "Ciências da Natureza:", layout: "comum" },
+                { pergunta: "Qual destas palavras indica uma ação (verbo)?", certa: "Correr", opcoes: ["Mesa", "Correr", "Bonito"], enunciado: "Gramática e Classes Gramaticais:", layout: "comum" },
+                { texto: "Um pacote tem 6 doces. Comprei 3 pacotes.", pergunta: "Quantos doces comprei ao todo?", certa: "18", opcoes: ["12", "15", "18"], enunciado: "Raciocínio Matemático:", layout: "comum" },
+                { pergunta: "Quantos meses tem um ano inteiro?", certa: "12", opcoes: ["10", "12", "24"], enunciado: "Medidas de Tempo:", layout: "comum" },
+                { pergunta: "Qual animal abaixo é considerado um anfíbio?", certa: "Sapo", opcoes: ["Peixe", "Sapo", "Águia"], enunciado: "Ciências Biológicas:", layout: "comum" },
+                { pergunta: "Qual sinal de pontuação usamos para fazer uma pergunta?", certa: "Interrogação (?)", opcoes: ["Ponto Final (.)", "Interrogação (?)", "Exclamação (!)"], enunciado: "Sinais de Pontuação:", layout: "comum" }
             ],
             anosFinais: [
                 { texto: "O aquecimento global afeta diretamente o clima da Terra.", pergunta: "Qual das opções é uma causa comum apontada por cientistas?", certa: "Emissão de gases estufa", opcoes: ["Uso de energia solar", "Emissão de gases estufa", "Plantio de árvores"], enunciado: "Interpretação de Ciências:", layout: "comum" },
@@ -154,7 +179,11 @@
                 { pergunta: "Qual dessas palavras é classificada como uma proparoxítona?", certa: "Lâmpada", opcoes: ["Lâmpada", "Café", "Caneta"], enunciado: "Gramática e acentuação:", layout: "comum" },
                 { pergunta: "Qual elemento químico é representado pela letra 'O' na tabela periódica?", certa: "Oxigênio", opcoes: ["Ouro", "Oxigênio", "Ósmio"], enunciado: "Introdução à Química:", layout: "comum" },
                 { pergunta: "Quem pintou a famosa obra 'Mona Lisa'?", certa: "Leonardo da Vinci", opcoes: ["Picasso", "Van Gogh", "Leonardo da Vinci"], enunciado: "História e Arte:", layout: "comum" },
-                { pergunta: "Qual é a capital da França?", certa: "Paris", opcoes: ["Londres", "Paris", "Roma"], enunciado: "Geografia Mundial:", layout: "comum" }
+                { pergunta: "Qual é a capital da França?", certa: "Paris", opcoes: ["Londres", "Paris", "Roma"], enunciado: "Geografia Mundial:", layout: "comum" },
+                { pergunta: "Qual é o maior planeta do nosso sistema solar?", certa: "Júpiter", opcoes: ["Terra", "Saturno", "Júpiter"], enunciado: "Astronomia Básica:", layout: "comum" },
+                { texto: "O artigo 5º da Constituição trata dos direitos e deveres individuais.", pergunta: "De qual documento histórico estamos falando?", certa: "Constituição Federal", opcoes: ["Constituição Federal", "Código Civil", "Lei de Cotas"], enunciado: "História e Cidadania:", layout: "comum" },
+                { pergunta: "Qual é a raiz quadrada de 81?", certa: "9", opcoes: ["7", "8", "9"], enunciado: "Matemática Financeira/Álgebra:", layout: "comum" },
+                { pergunta: "Qual bioma brasileiro é caracterizado por clima semiárido e vegetação de caatinga?", certa: "Nordeste", opcoes: ["Amazônia", "Nordeste", "Pampas"], enunciado: "Geografia e Biomas:", layout: "comum" }
             ],
             moduloTEA: [
                 { dica: "🍎", pergunta: "Toque no card igual a este:", certa: "🍎", opcoes: ["🍌", "🍎", "🍇"], enunciado: "Pareamento de Frutas:", layout: "tea" },
@@ -162,7 +191,11 @@
                 { dica: "🦖", pergunta: "Toque no Dinossauro:", certa: "🦖", opcoes: ["🐶", "🐱", "🦖"], enunciado: "Associação visual limpa:", layout: "tea" },
                 { dica: "2️⃣", pergunta: "Onde está o número 2?", certa: "2️⃣", opcoes: ["1️⃣", "2️⃣", "3️⃣"], enunciado: "Reconhecimento numérico:", layout: "tea" },
                 { dica: "🚗", pergunta: "Qual objeto serve para dirigir?", certa: "🚗", opcoes: ["🚗", "🍕", "🧸"], enunciado: "Função dos Objetos:", layout: "tea" },
-                { dica: "🥛", pergunta: "O que usamos para beber água?", certa: "🥛", opcoes: ["👟", "🥛", "✏️"], enunciado: "Rotina Diária:", layout: "tea" }
+                { dica: "🥛", pergunta: "O que usamos para beber água?", certa: "🥛", opcoes: ["👟", "🥛", "✏️"], enunciado: "Rotina Diária:", layout: "tea" },
+                { dica: "🔺", pergunta: "Qual figura é o triângulo vermelho?", certa: "🔺", opcoes: ["🟢", "🔺", "🟨"], enunciado: "Formas Geométricas Simples:", layout: "tea" },
+                { dica: "🐶", pergunta: "Quem faz o som 'Au Au'?", certa: "🐶", opcoes: ["🐱", "🐮", "🐶"], enunciado: "Sons dos Animais:", layout: "tea" },
+                { dica: "☀️", pergunta: "Qual item brilha de dia lá no céu?", certa: "☀️", opcoes: ["🌧️", "☀️", "🌙"], enunciado: "Estudo da Natureza:", layout: "tea" },
+                { dica: "🦷", pergunta: "O que escovamos depois de comer?", certa: "🦷", opcoes: ["👟", "👂", "🦷"], enunciado: "Hábitos de Higiene:", layout: "tea" }
             ],
             moduloProfessor: []
         };
@@ -223,8 +256,6 @@
 
         function salvarBlocoAtividades() {
             let questoesSalvas = 0;
-            
-            // Limpa o caderno anterior para receber o novo lote do professor
             bancoAtividades.moduloProfessor = [];
 
             for (let i = 1; i <= 10; i++) {
@@ -234,7 +265,6 @@
                 const dica = document.getElementById(`p${i}-dica`).value.trim();
                 const layout = document.getElementById(`p${i}-layout`).value;
 
-                // Só processa se o enunciado e a resposta certa estiverem preenchidos
                 if (enunciado && certa) {
                     let listaOpcoes = [];
                     if (opcoesTexto) {
