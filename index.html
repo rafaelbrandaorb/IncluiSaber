@@ -20,10 +20,10 @@
         <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-md w-full text-center border-t-8 border-orange-500">
             <div class="flex items-center justify-center gap-2 mb-2 select-none">
                 <div class="bg-gradient-to-tr from-teal-600 to-orange-400 text-white w-12 h-12 rounded-2xl flex items-center justify-center font-black text-2xl shadow-md transform rotate-3">
-                    iS
+                    IS
                 </div>
                 <h1 class="text-3xl font-black tracking-tight text-teal-800">
-                    Inclui<span class="text-orange-500">Saber</span>
+                    IncluiSaber
                 </h1>
             </div>
             <p class="text-slate-500 font-medium mb-6 text-sm">Plataforma Educacional Inclusiva</p>
@@ -70,8 +70,7 @@
                 <p class="text-xs text-purple-700 mt-1">Você pode formular de 1 até 10 questões de uma só vez abaixo. Deixe em branco as questões que não for utilizar. Ao clicar no botão ao final da página, todas as preenchidas serão compiladas no caderno do aluno.</p>
             </div>
 
-            <div id="container-questoes-professor" class="space-y-8 divide-y divide-slate-200">
-                </div>
+            <div id="container-questoes-professor" class="space-y-8 divide-y divide-slate-200"></div>
             
             <div class="pt-6">
                 <button onclick="salvarBlocoAtividades()" class="w-full bg-purple-700 hover:bg-purple-800 text-white font-extrabold py-4 rounded-xl shadow-md text-lg transition-all transform hover:scale-[1.01]">
@@ -85,10 +84,10 @@
         <header class="bg-teal-800 text-white p-4 shadow-md flex justify-between items-center">
             <div class="flex items-center gap-2 select-none">
                 <div class="bg-white text-teal-800 w-8 h-8 rounded-lg flex items-center justify-center font-black text-sm shadow transform rotate-3">
-                    iS
+                    IS
                 </div>
                 <h1 class="text-xl font-black tracking-tight text-white">
-                    Inclui<span class="text-orange-400">Saber</span>
+                    IncluiSaber
                 </h1>
             </div>
             <div class="flex items-center gap-3">
@@ -147,7 +146,6 @@
     <script>
         const letrasLetras = ["A", "B", "C", "D", "E", "F", "G", "H"];
 
-        // BANCO DE ATIVIDADES RECHEADO COM MUITO MAIS QUESTÕES COGNITIVAS
         const atividadesPadrao = {
             alfabetizacao: [
                 { dica: "⚽", exibicao: "B _ L A", certa: "O", opcoes: ["A", "O", "E"], enunciado: "Complete a palavra Bola com a vogal correta:", layout: "alfabetizacao" },
@@ -183,7 +181,7 @@
                 { pergunta: "Qual é o maior planeta do nosso sistema solar?", certa: "Júpiter", opcoes: ["Terra", "Saturno", "Júpiter"], enunciado: "Astronomia Básica:", layout: "comum" },
                 { texto: "O artigo 5º da Constituição trata dos direitos e deveres individuais.", pergunta: "De qual documento histórico estamos falando?", certa: "Constituição Federal", opcoes: ["Constituição Federal", "Código Civil", "Lei de Cotas"], enunciado: "História e Cidadania:", layout: "comum" },
                 { pergunta: "Qual é a raiz quadrada de 81?", certa: "9", opcoes: ["7", "8", "9"], enunciado: "Matemática Financeira/Álgebra:", layout: "comum" },
-                { pergunta: "Qual bioma brasileiro é caracterizado por clima semiárido e vegetação de caatinga?", certa: "Nordeste", opcoes: ["Amazônia", "Nordeste", "Pampas"], enunciado: "Geografia e Biomas:", layout: "comum" }
+                { pergunta: "Qual bioma brasileiro é caracterizado por clima semiárido e vegetação de caatinga?", certa: "Caatinga", opcoes: ["Amazônia", "Caatinga", "Pampas"], enunciado: "Geografia e Biomas:", layout: "comum" }
             ],
             moduloTEA: [
                 { dica: "🍎", pergunta: "Toque no card igual a este:", certa: "🍎", opcoes: ["🍌", "🍎", "🍇"], enunciado: "Pareamento de Frutas:", layout: "tea" },
@@ -208,7 +206,6 @@
         let moduloAtual = "";
         let modoTEAtoggled = false;
 
-        // Gerador dinâmico de 10 formulários de perguntas na Área do Professor
         function gerarCamposFormularioProfessor() {
             const container = document.getElementById('container-questoes-professor');
             container.innerHTML = '';
