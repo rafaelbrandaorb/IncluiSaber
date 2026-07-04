@@ -34,6 +34,7 @@
                     <option value="anosIniciais">📚 Anos Iniciais (1º ao 5º Ano)</option>
                     <option value="anosFinais">📐 Anos Finais (6º ao 9º Ano)</option>
                     <option value="moduloTEA">🧩 Módulo Adaptado (TEA)</option>
+                    <option value="moduloProfessor">📝 Atividades Criadas pelo Professor</option>
                 </select>
             </div>
 
@@ -42,64 +43,34 @@
             </button>
 
             <button onclick="abrirPainelProfessor()" class="w-full bg-slate-700 hover:bg-slate-800 text-white font-bold py-2.5 rounded-xl text-sm transition">
-                Criar Perguntas (Área do Professor) 📝
+                Criar Bloco de Perguntas (Área do Professor) 📝
             </button>
         </div>
     </div>
 
     <div id="tela-professor" class="fixed inset-0 bg-slate-100 flex flex-col items-center z-50 p-4 overflow-y-auto hidden">
-        <div class="w-full max-w-2xl bg-purple-800 text-white p-4 rounded-t-xl shadow-md flex justify-between items-center mt-4">
+        <div class="w-full max-w-3xl bg-purple-800 text-white p-5 rounded-t-xl shadow-md flex justify-between items-center mt-4">
             <div class="flex items-center gap-2">
                 <span class="text-2xl">📋</span>
-                <h2 class="text-xl font-bold">Criar Nova Pergunta</h2>
+                <h2 class="text-xl font-bold">Montar Bloco de Atividades (Até 10 Questões)</h2>
             </div>
-            <button onclick="fecharPainelProfessor()" class="bg-purple-900 hover:bg-purple-950 text-white font-bold py-1 px-3 rounded-lg text-sm transition">Voltar ao Início</button>
+            <button onclick="fecharPainelProfessor()" class="bg-purple-900 hover:bg-purple-950 text-white font-bold py-1.5 px-4 rounded-lg text-sm transition">Voltar ao Início</button>
         </div>
 
-        <div class="w-full max-w-2xl bg-white p-6 rounded-b-xl shadow-md border-x border-b border-slate-200 mb-8 space-y-6">
+        <div class="w-full max-w-3xl bg-white p-6 rounded-b-xl shadow-md border-x border-b border-slate-200 mb-8 space-y-6">
             <div class="border-l-8 border-purple-600 bg-purple-50 p-4 rounded-r-lg">
-                <h3 class="font-bold text-purple-900">Configurações do Exercício</h3>
-                <p class="text-xs text-purple-700 mt-1">Configure o comando e as alternativas para compor a trilha dinâmica do estudante.</p>
+                <h3 class="font-bold text-purple-900">Instruções do Caderno Autoral</h3>
+                <p class="text-xs text-purple-700 mt-1">Você pode formular de 1 até 10 questões de uma só vez abaixo. Deixe em branco as questões que não for utilizar. Ao clicar no botão ao final da página, todas as preenchidas serão compiladas no caderno do aluno.</p>
             </div>
 
-            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                <label class="block text-sm font-bold text-slate-700 mb-2">Para qual caderno é esta questão?</label>
-                <select id="nova-modulo" onchange="ajustarCamposForms()" class="w-full border p-2.5 rounded-lg bg-white focus:ring-2 focus:ring-purple-500 outline-none">
-                    <option value="alfabetizacao">🔤 Ciclo de Alfabetização</option>
-                    <option value="anosIniciais">📚 Anos Iniciais (1º ao 5º Ano)</option>
-                    <option value="anosFinais">📐 Anos Finais (6º ao 9º Ano)</option>
-                    <option value="moduloTEA">🧩 Módulo Adaptado (TEA)</option>
-                </select>
-            </div>
-
-            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                <label class="block text-sm font-bold text-slate-700 mb-1">Enunciado da Questão (Texto falado pela acessibilidade):</label>
-                <input type="text" id="nova-enunciado" placeholder="Ex: Marque a alternativa correta sobre a fábula:" class="w-full border p-2.5 rounded-lg bg-white focus:ring-2 focus:ring-purple-500 outline-none">
-            </div>
-
-            <div id="campo-exibicao" class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                <label class="block text-sm font-bold text-slate-700 mb-1">Palavra Oculta com Lacuna (Use _ para o espaço vazio):</label>
-                <input type="text" id="nova-exibicao" placeholder="Ex: C _ S A" class="w-full border p-2.5 rounded-lg bg-white focus:ring-2 focus:ring-purple-500 outline-none">
-            </div>
-
-            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                <label class="block text-sm font-bold text-slate-700 mb-1">Dica Visual ou Suporte Cognitivo (Emoji, Palavra ou Número):</label>
-                <input type="text" id="nova-dica" placeholder="Ex: 🏠 ou Letra A" class="w-full border p-2.5 rounded-lg bg-white focus:ring-2 focus:ring-purple-500 outline-none">
-            </div>
-
-            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                <label class="block text-sm font-bold text-slate-700 mb-1 text-emerald-700">✓ Resposta Correta (Apenas uma opção):</label>
-                <input type="text" id="nova-certa" placeholder="Ex: A" class="w-full border-2 border-emerald-200 p-2.5 rounded-lg bg-white focus:ring-2 focus:ring-emerald-500 outline-none font-bold text-emerald-800">
-            </div>
-
-            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                <label class="block text-sm font-bold text-slate-700 mb-1 text-red-700">✕ Outras Opções Incorretas (Separadas por vírgula):</label>
-                <input type="text" id="nova-opcoes" placeholder="Ex: E, O, U" class="w-full border-2 border-red-200 p-2.5 rounded-lg bg-white focus:ring-2 focus:ring-red-500 outline-none">
-            </div>
+            <div id="container-questoes-professor" class="space-y-8 divide-y divide-slate-200">
+                </div>
             
-            <button onclick="salvarNovaAtividade()" class="w-full bg-purple-700 hover:bg-purple-800 text-white font-extrabold py-3.5 rounded-xl shadow-md transition-all text-center">
-                Salvar Exercício na Trilha 💾
-            </button>
+            <div class="pt-6">
+                <button onclick="salvarBlocoAtividades()" class="w-full bg-purple-700 hover:bg-purple-800 text-white font-extrabold py-4 rounded-xl shadow-md text-lg transition-all transform hover:scale-[1.01]">
+                    Salvar Todas as Questões no Módulo do Professor 💾
+                </button>
+            </div>
         </div>
     </div>
 
@@ -121,7 +92,7 @@
                 <div id="container-modulos" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
             </section>
 
-            <section id="area-jogo" class="bg-white p-6 rounded-2xl shadow border border-slate-200 my-auto hidden card-interativo transition-all duration-200">
+            <section id="area-jogo" class="bg-white p-6 rounded-2xl shadow border border-slate-200 my-auto hidden card-interativo transition-all duration-200 w-full max-w-xl mx-auto">
                 <div class="flex justify-between items-center mb-4 gap-2">
                     <h2 class="text-md font-bold text-teal-900 bg-teal-50 px-3 py-1 rounded-full border border-teal-100" id="jogo-titulo">Exercício</h2>
                     <div class="flex gap-2 shrink-0">
@@ -130,7 +101,7 @@
                     </div>
                 </div>
                 <p class="text-xl text-center mb-6 font-bold bg-slate-50 p-4 rounded-xl border border-slate-100" id="jogo-enunciado">Carregando...</p>
-                <div id="jogo-opcoes" class="flex flex-col items-center justify-center min-h-[180px] gap-4 w-full"></div>
+                <div id="jogo-opcoes" class="flex flex-col items-center justify-center min-h-[180px] gap-3 w-full"></div>
             </section>
 
             <section class="bg-slate-900 text-white p-5 rounded-2xl shadow-lg mt-auto">
@@ -145,7 +116,7 @@
                     <div class="bg-slate-800 p-3 rounded-xl border border-slate-700">
                         <p class="text-slate-400 font-bold mb-1">❌ Índice de Desvios por Bloco</p>
                         <p>• Alfabetização: <span id="err-ler" class="text-rose-400 font-bold">0</span></p>
-                        <p>• Fundamental (1º ao 9º): <span id="err-compreensao" class="text-rose-400 font-bold">0</span></p>
+                        <p>• Fundamental / Custom: <span id="err-compreensao" class="text-rose-400 font-bold">0</span></p>
                         <p>• Módulos Clínicos TEA: <span id="err-tea" class="text-rose-400 font-bold">0</span></p>
                     </div>
                     <div class="bg-slate-800 p-3 rounded-xl border border-slate-700">
@@ -160,85 +131,145 @@
     </div>
 
     <script>
-        // BANCO DE DADOS INTEGRADO DO ALFABETIZAÇÃO AO 9º ANO E MÓDULO TEA
+        const letrasLetras = ["A", "B", "C", "D", "E", "F", "G", "H"];
+
         const atividadesPadrao = {
             alfabetizacao: [
-                { dica: "⚽", exibicao: "B _ L A", certa: "O", opcoes: ["A", "O", "E"], enunciado: "Complete a palavra Bola com a vogal correta:" },
-                { dica: "🐱", exibicao: "G _ T O", certa: "A", opcoes: ["A", "I", "U"], enunciado: "Qual letra falta na palavra Gato?" },
-                { dica: "☀️", exibicao: "S _ L", certa: "O", opcoes: ["E", "O", "A"], enunciado: "Complete a palavra Sol:" },
-                { dica: "🚗", exibicao: "C _ R R O", certa: "A", opcoes: ["E", "U", "A"], enunciado: "Identifique a letra que falta na palavra Carro:" }
+                { dica: "⚽", exibicao: "B _ L A", certa: "O", opcoes: ["A", "O", "E"], enunciado: "Complete a palavra Bola com a vogal correta:", layout: "alfabetizacao" },
+                { dica: "🐱", exibicao: "G _ T O", certa: "A", opcoes: ["A", "I", "U"], enunciado: "Qual letra falta na palavra Gato?", layout: "alfabetizacao" },
+                { dica: "☀️", exibicao: "S _ L", certa: "O", opcoes: ["E", "O", "A"], enunciado: "Complete a palavra Sol:", layout: "alfabetizacao" },
+                { dica: "🚗", exibicao: "C _ R R O", certa: "A", opcoes: ["E", "U", "A"], enunciado: "Identifique a letra que falta na palavra Carro:", layout: "alfabetizacao" },
+                { dica: "🏠", exibicao: "C _ S A", certa: "A", opcoes: ["O", "E", "A"], enunciado: "Qual a vogal correta para a palavra Casa?", layout: "alfabetizacao" }
             ],
             anosIniciais: [
-                { pergunta: "Qual palavra está escrita de forma correta?", certa: "Cachorro", opcoes: ["Xaxorro", "Cachorro", "Cassorro"], enunciado: "Ortografia básica:" },
-                { texto: "Mariana tinha 12 maçãs. Ela comeu 4.", pergunta: "Com quantas maçãs Mariana ficou?", certa: "8", opcoes: ["6", "8", "9"], enunciado: "Resolva a subtração:" },
-                { pergunta: "Qual é o antônimo da palavra 'Alto'?", certa: "Baixo", opcoes: ["Grande", "Baixo", "Largo"], enunciado: "Sinônimos e Antônimos:" },
-                { pergunta: "Quanto é 5 vezes 4?", certa: "20", opcoes: ["15", "20", "25"], enunciado: "Multiplicação fundamental:" }
+                { pergunta: "Qual palavra está escrita de forma correta?", certa: "Cachorro", opcoes: ["Xaxorro", "Cachorro", "Cassorro"], enunciado: "Ortografia básica:", layout: "comum" },
+                { texto: "Mariana tinha 12 maçãs. Ela comeu 4.", pergunta: "Com quantas maçãs Mariana ficou?", certa: "8", opcoes: ["6", "8", "9"], enunciado: "Resolva a subtração:", layout: "comum" },
+                { pergunta: "Qual é o antônimo da palavra 'Alto'?", certa: "Baixo", opcoes: ["Grande", "Baixo", "Largo"], enunciado: "Sinônimos e Antônimos:", layout: "comum" },
+                { pergunta: "Quanto é 5 vezes 4?", certa: "20", opcoes: ["15", "20", "25"], enunciado: "Multiplicação fundamental:", layout: "comum" },
+                { texto: "O Sol nasce no leste e se põe no oeste.", pergunta: "Em qual ponto cardeal o Sol nasce?", certa: "Leste", opcoes: ["Leste", "Oeste", "Norte"], enunciado: "Ciências da Natureza:", layout: "comum" }
             ],
             anosFinais: [
-                { texto: "O aquecimento global afeta diretamente o clima da Terra.", pergunta: "Qual das opções é uma causa comum apontada por cientistas?", certa: "Emissão de gases estufa", opcoes: ["Uso de energia solar", "Emissão de gases estufa", "Plantio de árvores"], enunciado: "Interpretação de Ciências:" },
-                { pergunta: "Se a equação é x + 7 = 15, qual é o valor de x?", certa: "8", opcoes: ["6", "7", "8"], enunciado: "Álgebra elementar:" },
-                { pergunta: "Qual dessas palavras é classificada como uma proparoxítona?", certa: "Lâmpada", opcoes: ["Lâmpada", "Café", "Caneta"], enunciado: "Gramática e acentuação:" },
-                { pergunta: "Qual elemento químico é representado pela letra 'O' na tabela periódica?", certa: "Oxigênio", opcoes: ["Ouro", "Oxigênio", "Ósmio"], enunciado: "Introdução à Química:" }
+                { texto: "O aquecimento global afeta diretamente o clima da Terra.", pergunta: "Qual das opções é uma causa comum apontada por cientistas?", certa: "Emissão de gases estufa", opcoes: ["Uso de energia solar", "Emissão de gases estufa", "Plantio de árvores"], enunciado: "Interpretação de Ciências:", layout: "comum" },
+                { pergunta: "Se a equação é x + 7 = 15, qual é o valor de x?", certa: "8", opcoes: ["6", "7", "8"], enunciado: "Álgebra elementar:", layout: "comum" },
+                { pergunta: "Qual dessas palavras é classificada como uma proparoxítona?", certa: "Lâmpada", opcoes: ["Lâmpada", "Café", "Caneta"], enunciado: "Gramática e acentuação:", layout: "comum" },
+                { pergunta: "Qual elemento químico é representado pela letra 'O' na tabela periódica?", certa: "Oxigênio", opcoes: ["Ouro", "Oxigênio", "Ósmio"], enunciado: "Introdução à Química:", layout: "comum" },
+                { pergunta: "Quem pintou a famosa obra 'Mona Lisa'?", certa: "Leonardo da Vinci", opcoes: ["Picasso", "Van Gogh", "Leonardo da Vinci"], enunciado: "História e Arte:", layout: "comum" },
+                { pergunta: "Qual é a capital da França?", certa: "Paris", opcoes: ["Londres", "Paris", "Roma"], enunciado: "Geografia Mundial:", layout: "comum" }
             ],
             moduloTEA: [
-                { dica: "🍎", pergunta: "Toque no card igual a este:", certa: "🍎", opcoes: ["🍌", "🍎", "🍇"], enunciado: "Pareamento de Frutas:" },
-                { dica: "🟦", pergunta: "Qual é o Quadrado Azul?", certa: "🟦", opcoes: ["🟥", "🟨", "🟦"], enunciado: "Reconhecimento de formas e cores:" },
-                { dica: "🦖", pergunta: "Toque no Dinossauro:", certa: "🦖", opcoes: ["🐶", "🐱", "🦖"], enunciado: "Associação visual limpa:" },
-                { dica: "2️⃣", pergunta: "Onde está o número 2?", certa: "2️⃣", opcoes: ["1️⃣", "2️⃣", "3️⃣"], enunciado: "Reconhecimento numérico:" }
-            ]
+                { dica: "🍎", pergunta: "Toque no card igual a este:", certa: "🍎", opcoes: ["🍌", "🍎", "🍇"], enunciado: "Pareamento de Frutas:", layout: "tea" },
+                { dica: "🟦", pergunta: "Qual é o Quadrado Azul?", certa: "🟦", opcoes: ["🟥", "🟨", "🟦"], enunciado: "Reconhecimento de formas e cores:", layout: "tea" },
+                { dica: "🦖", pergunta: "Toque no Dinossauro:", certa: "🦖", opcoes: ["🐶", "🐱", "🦖"], enunciado: "Associação visual limpa:", layout: "tea" },
+                { dica: "2️⃣", pergunta: "Onde está o número 2?", certa: "2️⃣", opcoes: ["1️⃣", "2️⃣", "3️⃣"], enunciado: "Reconhecimento numérico:", layout: "tea" },
+                { dica: "🚗", pergunta: "Qual objeto serve para dirigir?", certa: "🚗", opcoes: ["🚗", "🍕", "🧸"], enunciado: "Função dos Objetos:", layout: "tea" },
+                { dica: "🥛", pergunta: "O que usamos para beber água?", certa: "🥛", opcoes: ["👟", "🥛", "✏️"], enunciado: "Rotina Diária:", layout: "tea" }
+            ],
+            moduloProfessor: []
         };
 
         let bancoAtividades = JSON.parse(localStorage.getItem('bancoAtividades')) || atividadesPadrao;
 
-        let alunoLogado = { nome: "", anoEscolar: "", activitiesDone: 0, errosPorModulo: { alfabetizacao: 0, anosIniciais: 0, anosFinais: 0, moduloTEA: 0 }, itensErrados: [] };
+        let alunoLogado = { nome: "", anoEscolar: "", activitiesDone: 0, errosPorModulo: { alfabetizacao: 0, anosIniciais: 0, anosFinais: 0, moduloTEA: 0, moduloProfessor: 0 }, itensErrados: [] };
         let listaAtividades = [];
         let faseAtualIndex = 0;
         let moduloAtual = "";
         let modoTEAtoggled = false;
 
-        function abrirPainelProfessor() { 
-            document.getElementById('tela-professor').classList.remove('hidden'); 
-            ajustarCamposForms();
-        }
-        function fecharPainelProfessor() { document.getElementById('tela-professor').classList.add('hidden'); }
-
-        function ajustarCamposForms() {
-            const modulo = document.getElementById('nova-modulo').value;
-            const campoExibicao = document.getElementById('campo-exibicao');
-            if(modulo === 'alfabetizacao') {
-                campoExibicao.classList.remove('hidden');
-            } else {
-                campoExibicao.classList.add('hidden');
+        // Gerador dinâmico de 10 formulários de perguntas na Área do Professor
+        function gerarCamposFormularioProfessor() {
+            const container = document.getElementById('container-questoes-professor');
+            container.innerHTML = '';
+            
+            for (let i = 1; i <= 10; i++) {
+                container.innerHTML += `
+                    <div class="pt-6 ${i > 1 ? 'mt-6' : ''}" data-questao="${i}">
+                        <h4 class="text-md font-black text-purple-950 mb-3 flex items-center gap-2">📌 Exercício Nº ${i}</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Layout visual:</label>
+                                <select id="p${i}-layout" class="w-full border p-2 rounded-lg bg-white text-xs">
+                                    <option value="comum">📚 Padrão com Alternativas (A), B), C))</option>
+                                    <option value="tea">🧩 Adaptado TEA (Cards Grandes e Limpos)</option>
+                                </select>
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Enunciado / Pergunta:</label>
+                                <input type="text" id="p${i}-enunciado" placeholder="Ex: Quanto é 2 + 2?" class="w-full border p-2 rounded-lg bg-white text-xs">
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Dica Visual (Emoji):</label>
+                                <input type="text" id="p${i}-dica" placeholder="Ex: 🧠 ou 🍎" class="w-full border p-2 rounded-lg bg-white text-xs">
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                                <label class="block text-xs font-bold text-slate-700 mb-1 text-emerald-700">✓ Resposta Correta:</label>
+                                <input type="text" id="p${i}-certa" placeholder="Ex: 4" class="w-full border p-2 rounded-lg bg-white text-xs font-bold text-emerald-800">
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 sm:col-span-2">
+                                <label class="block text-xs font-bold text-slate-700 mb-1 text-red-700">✕ Opções Incorretas (Separadas por vírgula):</label>
+                                <input type="text" id="p${i}-opcoes" placeholder="Ex: 3, 5, 6" class="w-full border p-2 rounded-lg bg-white text-xs">
+                            </div>
+                        </div>
+                    </div>
+                `;
             }
         }
 
-        function salvarNovaAtividade() {
-            const modulo = document.getElementById('nova-modulo').value;
-            const enunciado = document.getElementById('nova-enunciado').value.trim();
-            const exibicao = document.getElementById('nova-exibicao').value.trim();
-            const dica = document.getElementById('nova-dica').value.trim();
-            const certa = document.getElementById('nova-certa').value.trim();
-            const opcoesTexto = document.getElementById('nova-opcoes').value.trim();
+        function abrirPainelProfessor() { 
+            gerarCamposFormularioProfessor();
+            document.getElementById('tela-professor').classList.remove('hidden'); 
+        }
+        
+        function fecharPainelProfessor() { document.getElementById('tela-professor').classList.add('hidden'); }
 
-            if(!enunciado || !certa || !opcoesTexto) return alert("Por favor, preencha o enunciado, resposta correta e opções incorretas.");
-
-            const listaOpcoes = opcoesTexto.split(',').map(o => o.trim());
-            listaOpcoes.push(certa);
-            listaOpcoes.sort(() => Math.random() - 0.5);
-
-            const novaQuestao = { enunciado, certa, dica, opcoes: listaOpcoes, exibicao, pergunta: enunciado };
+        function salvarBlocoAtividades() {
+            let questoesSalvas = 0;
             
-            bancoAtividades[modulo].push(novaQuestao);
+            // Limpa o caderno anterior para receber o novo lote do professor
+            bancoAtividades.moduloProfessor = [];
+
+            for (let i = 1; i <= 10; i++) {
+                const enunciado = document.getElementById(`p${i}-enunciado`).value.trim();
+                const certa = document.getElementById(`p${i}-certa`).value.trim();
+                const opcoesTexto = document.getElementById(`p${i}-opcoes`).value.trim();
+                const dica = document.getElementById(`p${i}-dica`).value.trim();
+                const layout = document.getElementById(`p${i}-layout`).value;
+
+                // Só processa se o enunciado e a resposta certa estiverem preenchidos
+                if (enunciado && certa) {
+                    let listaOpcoes = [];
+                    if (opcoesTexto) {
+                        listaOpcoes = opcoesTexto.split(',').map(o => o.trim());
+                    }
+                    listaOpcoes.push(certa);
+                    listaOpcoes.sort(() => Math.random() - 0.5);
+
+                    const novaQuestao = { 
+                        enunciado: enunciado, 
+                        certa: certa, 
+                        dica: dica || "📝", 
+                        opcoes: listaOpcoes, 
+                        pergunta: enunciado, 
+                        layout: layout 
+                    };
+
+                    bancoAtividades.moduloProfessor.push(novaQuestao);
+                    questoesSalvas++;
+                }
+            }
+
+            if (questoesSalvas === 0) {
+                return alert("Por favor, preencha pelo menos o Enunciado e a Resposta Correta da primeira questão para poder salvar.");
+            }
+
             localStorage.setItem('bancoAtividades', JSON.stringify(bancoAtividades));
-            
-            alert("Questão adicionada com sucesso no modelo Google Forms!");
+            alert(`Sucesso! Um bloco com ${questoesSalvas} atividades foi salvo e configurado.`);
             fecharPainelProfessor();
         }
 
         function fazerLogin() {
             const nome = document.getElementById('input-nome-usuario').value.trim();
             const ano = document.getElementById('select-ano-escolar').value;
-            if(!nome) return alert("Insira o nome do estudante para acompanhar o relatório.");
+            if(!nome) return alert("Insira o nome do estudante.");
 
             alunoLogado.nome = nome;
             alunoLogado.anoEscolar = ano;
@@ -261,24 +292,27 @@
                     <div class="bg-white p-5 rounded-2xl shadow border-2 border-orange-500 text-center card-interativo">
                         <h3 class="font-extrabold text-orange-600 text-lg mb-1">🧩 Módulo TEA Clínico</h3>
                         <p class="text-xs text-slate-500 mb-4">Pareamento limpo, foco total e comandos simples.</p>
-                        <button onclick="carregarAtividade('moduloTEA')" class="w-full bg-orange-500 text-white font-bold py-2.5 rounded-xl text-sm transition shadow-sm">Abrir Caderno</button>
+                        <button onclick="carregarAtividade('moduloTEA')" class="w-full bg-orange-500 text-white font-bold py-2.5 rounded-xl text-sm shadow-sm">Abrir Caderno</button>
                     </div>`;
             } else {
                 document.getElementById('titulo-secao-modulos').innerText = "Trilhas de Aprendizado Disponíveis";
                 
                 const cards = {
-                    alfabetizacao: `<div class="bg-white p-5 rounded-2xl shadow border-b-4 border-teal-500 text-center card-interativo"><h3 class="font-extrabold text-teal-700 text-md mb-3">🔤 Ciclo de Alfabetização</h3><button onclick="carregarAtividade('alfabetizacao')" class="w-full bg-teal-600 text-white font-bold py-2 rounded-xl text-sm transition">Iniciar Caderno</button></div>`,
-                    anosIniciais: `<div class="bg-white p-5 rounded-2xl shadow border-b-4 border-blue-500 text-center card-interativo"><h3 class="font-extrabold text-blue-700 text-md mb-3">📚 Anos Iniciais (1º ao 5º)</h3><button onclick="carregarAtividade('anosIniciais')" class="w-full bg-blue-500 text-white font-bold py-2 rounded-xl text-sm transition">Iniciar Caderno</button></div>`,
-                    anosFinais: `<div class="bg-white p-5 rounded-2xl shadow border-b-4 border-purple-500 text-center card-interativo"><h3 class="font-extrabold text-purple-700 text-md mb-3">📐 Anos Finais (6º ao 9º)</h3><button onclick="carregarAtividade('anosFinais')" class="w-full bg-purple-500 text-white font-bold py-2 rounded-xl text-sm transition">Iniciar Caderno</button></div>`,
-                    moduloTEA: `<div class="bg-white p-5 rounded-2xl shadow border-b-4 border-orange-500 text-center card-interativo"><h3 class="font-extrabold text-orange-700 text-md mb-3">🧩 Módulo Adaptado (TEA)</h3><button onclick="carregarAtividade('moduloTEA')" class="w-full bg-orange-500 text-white font-bold py-2 rounded-xl text-sm transition">Iniciar Caderno</button></div>`
+                    alfabetizacao: `<div class="bg-white p-5 rounded-2xl shadow border-b-4 border-teal-500 text-center card-interativo"><h3 class="font-extrabold text-teal-700 text-md mb-3">🔤 Ciclo de Alfabetização</h3><button onclick="carregarAtividade('alfabetizacao')" class="w-full bg-teal-600 text-white font-bold py-2 rounded-xl text-sm">Iniciar Caderno</button></div>`,
+                    anosIniciais: `<div class="bg-white p-5 rounded-2xl shadow border-b-4 border-blue-500 text-center card-interativo"><h3 class="font-extrabold text-blue-700 text-md mb-3">📚 Anos Iniciais (1º ao 5º)</h3><button onclick="carregarAtividade('anosIniciais')" class="w-full bg-blue-500 text-white font-bold py-2 rounded-xl text-sm">Iniciar Caderno</button></div>`,
+                    anosFinais: `<div class="bg-white p-5 rounded-2xl shadow border-b-4 border-purple-500 text-center card-interativo"><h3 class="font-extrabold text-purple-700 text-md mb-3">📐 Anos Finais (6º ao 9º)</h3><button onclick="carregarAtividade('anosFinais')" class="w-full bg-purple-500 text-white font-bold py-2 rounded-xl text-sm">Iniciar Caderno</button></div>`,
+                    moduloTEA: `<div class="bg-white p-5 rounded-2xl shadow border-b-4 border-orange-500 text-center card-interativo"><h3 class="font-extrabold text-orange-700 text-md mb-3">🧩 Módulo Adaptado (TEA)</h3><button onclick="carregarAtividade('moduloTEA')" class="w-full bg-orange-500 text-white font-bold py-2 rounded-xl text-sm">Iniciar Caderno</button></div>`,
+                    moduloProfessor: `<div class="bg-white p-5 rounded-2xl shadow border-2 border-purple-600 bg-purple-50 text-center card-interativo"><h3 class="font-extrabold text-purple-800 text-md mb-3">📝 Atividades Criadas pelo Professor</h3><button onclick="carregarAtividade('moduloProfessor')" class="w-full bg-purple-700 text-white font-bold py-2 rounded-xl text-sm">Abrir Tarefas Personalizadas</button></div>`
                 };
 
-                // Mostra a recomendada do aluno + o caderno TEA sempre acessível
-                container.innerHTML = cards[alunoLogado.anoEscolar];
+                container.innerHTML = cards[alunoLogado.anoEscolar] || cards['anosIniciais'];
+                
+                if(bancoAtividades.moduloProfessor && bancoAtividades.moduloProfessor.length > 0 && alunoLogado.anoEscolar !== 'moduloProfessor') {
+                    container.innerHTML += cards['moduloProfessor'];
+                }
+                
                 if(alunoLogado.anoEscolar !== 'moduloTEA') {
                     container.innerHTML += cards['moduloTEA'];
-                } else {
-                    container.innerHTML += cards['alfabetizacao'];
                 }
             }
         }
@@ -301,6 +335,11 @@
             faseAtualIndex = 0;
             listaAtividades = bancoAtividades[categoria] || [];
             
+            if(listaAtividades.length === 0) {
+                alert("Este caderno ainda não possui atividades salvas.");
+                return;
+            }
+
             document.getElementById('secao-trilhas').classList.add('hidden');
             document.getElementById('area-jogo').classList.remove('hidden');
             renderizarFaseSaber();
@@ -313,7 +352,7 @@
             if (faseAtualIndex >= listaAtividades.length) {
                 document.getElementById('jogo-titulo').innerText = "Concluído! 🎉";
                 document.getElementById('jogo-enunciado').innerText = "Excelente! Você concluiu todas as tarefas deste caderno de atividades.";
-                divOpcoes.innerHTML = `<button onclick="voltarParaMenu()" class="bg-teal-600 text-white font-extrabold py-3 px-8 rounded-xl transition">Voltar ao Menu Principal</button>`;
+                divOpcoes.innerHTML = `<button onclick="voltarParaMenu()" class="bg-teal-600 text-white font-extrabold py-3 px-8 rounded-xl">Voltar ao Menu Principal</button>`;
                 return;
             }
 
@@ -321,28 +360,30 @@
             document.getElementById('jogo-titulo').innerText = `Exercício ${faseAtualIndex + 1} de ${listaAtividades.length}`;
             document.getElementById('jogo-enunciado').innerText = act.enunciado || "Escolha a resposta correta:";
 
-            if (moduloAtual === 'alfabetizacao') {
+            if (act.layout === 'alfabetizacao') {
                 let html = `<div class="text-7xl mb-2">${act.dica || '🔤'}</div>`;
-                html += `<div id="palavra-container" class="text-4xl font-black tracking-widest bg-slate-50 px-6 py-2.5 rounded-xl mb-4 border border-teal-300 text-center">${act.exibicao}</div>`;
-                html += `<div id="alternativas-container" class="flex gap-2 flex-wrap justify-center">`;
-                act.opcoes.forEach(op => {
-                    html += `<button onclick="verificarLetra(this, '${op}', '${act.certa}', '${act.exibicao}')" class="bg-amber-400 hover:bg-amber-500 text-white text-2xl font-black px-6 py-3 rounded-xl transition shadow-sm">${op}</button>`;
+                html += `<div id="palavra-container" class="text-4xl font-black tracking-widest bg-slate-50 px-6 py-2.5 rounded-xl mb-4 border border-teal-300 text-center w-full">${act.exibicao}</div>`;
+                html += `<div id="alternativas-container" class="flex gap-2 flex-wrap justify-center w-full">`;
+                act.opcoes.forEach((op, idx) => {
+                    const letraItem = letrasLetras[idx] || 'A';
+                    html += `<button onclick="verificarLetra(this, '${op}', '${act.certa}', '${act.exibicao}')" class="bg-amber-400 hover:bg-amber-500 text-white text-xl font-black px-5 py-3 rounded-xl transition shadow-sm flex items-center justify-between min-w-[70px]"><span>${letraItem}) ${op}</span> <span class="feedback-icon ml-2"></span></button>`;
                 });
                 divOpcoes.innerHTML = html + `</div><div id="acao-proximo" class="mt-2"></div>`;
-            } else if (moduloAtual === 'moduloTEA') {
+            } else if (act.layout === 'tea') {
                 let html = `<div class="text-8xl mb-4 text-center">${act.dica || '🧩'}</div>`;
-                html += `<div class="grid grid-cols-3 gap-4 w-full max-w-md">`;
+                html += `<div id="alternativas-container" class="grid grid-cols-3 gap-4 w-full">`;
                 act.opcoes.forEach(op => {
-                    html += `<button onclick="verificarDireto(this, '${op}', '${act.certa}')" class="bg-white border-4 border-slate-200 p-5 rounded-2xl text-4xl hover:border-teal-500 transition shadow-sm">${op}</button>`;
+                    html += `<button onclick="verificarDireto(this, '${op}', '${act.certa}')" class="bg-white border-4 border-slate-200 p-5 rounded-2xl text-4xl hover:border-teal-50 transition shadow-sm flex flex-col items-center justify-center relative"><span>${op}</span><span class="feedback-icon text-sm absolute top-1 right-2"></span></button>`;
                 });
                 divOpcoes.innerHTML = html + `</div>`;
             } else {
                 let html = "";
                 if(act.texto) html += `<div class="bg-slate-50 p-4 rounded-xl mb-3 text-sm border text-left font-medium text-slate-700 w-full">${act.texto}</div>`;
                 if(act.pergunta) html += `<p class="font-bold text-center text-md mb-4 text-slate-700">${act.pergunta}</p>`;
-                html += `<div class="flex flex-col gap-2.5 w-full max-w-md">`;
-                act.opcoes.forEach(op => {
-                    html += `<button onclick="verificarDireto(this, '${op}', '${act.certa}')" class="bg-white border-2 border-slate-100 p-3.5 rounded-xl text-left hover:bg-teal-50 hover:border-teal-300 font-bold text-slate-700 shadow-sm transition">${op}</button>`;
+                html += `<div id="alternativas-container" class="flex flex-col gap-2.5 w-full">`;
+                act.opcoes.forEach((op, idx) => {
+                    const letraItem = letrasLetras[idx] || 'A';
+                    html += `<button onclick="verificarDireto(this, '${op}', '${act.certa}')" class="bg-white border-2 border-slate-100 p-3.5 rounded-xl text-left hover:bg-teal-50 hover:border-teal-300 font-bold text-slate-700 shadow-sm transition flex items-center justify-between w-full"><span>${letraItem}) ${op}</span> <span class="feedback-icon font-black"></span></button>`;
                 });
                 divOpcoes.innerHTML = html + `</div>`;
             }
@@ -357,29 +398,46 @@
         }
 
         function verificarLetra(elm, escolha, certa, orig) {
+            const iconSpan = elm.querySelector('.feedback-icon');
             if(escolha === certa) {
                 dispararAnimacaoCard('animar-acerto');
+                elm.classList.remove('bg-amber-400', 'hover:bg-amber-500');
+                elm.classList.add('bg-emerald-500', 'text-white');
+                if(iconSpan) iconSpan.innerText = " ✓";
                 document.getElementById('palavra-container').innerText = orig.replace('_', escolha);
                 document.getElementById('alternativas-container').style.pointerEvents = 'none';
-                document.getElementById('acao-proximo').innerHTML = `<button onclick="computarAvanço(true)" class="bg-emerald-500 text-white px-8 py-2.5 rounded-xl font-bold shadow transition mt-4">Avançar Prossiga ➔</button>`;
+                document.getElementById('acao-proximo').innerHTML = `<button onclick="computarAvanço(true)" class="bg-emerald-500 text-white px-8 py-2.5 rounded-xl font-bold shadow transition mt-4 w-full">Avançar ➔</button>`;
             } else {
                 dispararAnimacaoCard('animar-erro');
+                elm.classList.remove('bg-amber-400', 'hover:bg-amber-500');
                 elm.classList.add('bg-rose-500', 'text-white');
+                if(iconSpan) iconSpan.innerText = " ✕";
                 elm.disabled = true;
                 computarAvanço(false, escolha);
             }
         }
 
         function verificarDireto(elm, escolha, certa) {
+            const iconSpan = elm.querySelector('.feedback-icon');
+            document.getElementById('alternativas-container').style.pointerEvents = 'none';
+            
             if(escolha === certa) {
                 dispararAnimacaoCard('animar-acerto');
-                elm.classList.add('bg-emerald-500', 'text-white');
-                setTimeout(() => computarAvanço(true), 600);
+                elm.classList.add('bg-emerald-500', 'text-white', 'border-emerald-600');
+                if(iconSpan) iconSpan.innerText = " ✓";
+                setTimeout(() => {
+                    document.getElementById('alternativas-container').style.pointerEvents = 'auto';
+                    computarAvanço(true);
+                }, 1000);
             } else {
                 dispararAnimacaoCard('animar-erro');
-                elm.classList.add('bg-rose-500', 'text-white');
-                elm.disabled = true;
-                computarAvanço(false, escolha);
+                elm.classList.add('bg-rose-500', 'text-white', 'border-rose-600');
+                if(iconSpan) iconSpan.innerText = " ✕";
+                setTimeout(() => {
+                    document.getElementById('alternativas-container').style.pointerEvents = 'auto';
+                    elm.disabled = true;
+                    computarAvanço(false, escolha);
+                }, 800);
             }
         }
 
@@ -390,7 +448,7 @@
                 renderizarFaseSaber();
             } else {
                 let moduloLabel = moduloAtual;
-                if(moduloLabel === 'anosIniciais' || moduloLabel === 'anosFinais') {
+                if(moduloLabel === 'anosIniciais' || moduloLabel === 'anosFinais' || moduloLabel === 'moduloProfessor') {
                     alunoLogado.errosPorModulo.anosIniciais++;
                 } else {
                     alunoLogado.errosPorModulo[moduloLabel]++;
