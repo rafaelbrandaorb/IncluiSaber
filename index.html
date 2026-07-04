@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal INCLUISABER - Rede Municipal de Ensino</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .modo-clean { background-color: #F0F4F8 !important; color: #2C3E50 !important; }
+        .modo-clean .card-interativo { background: #FFFFFF !important; border: 3px solid #95A5A6 !important; box-shadow: none !important; }
+        @keyframes flash-acerto { 0%, 100% { background-color: white; } 50% { background-color: #DEF7EC; border-color: #31C48D; } }
+        @keyframes flash-erro { 0%, 100% { background-color: white; } 50% { background-color: #FDE8E8; border-color: #F05252; } }
+        .animar-acerto { animation: flash-acerto 0.6s ease-out; }
+        .animar-erro { animation: flash-erro 0.6s ease-out; }
+    </style>
+</head>
+<body class="bg-blue-50 text-gray-800 transition-colors duration-300 font-sans min-h-screen">
+
+    <div id="tela-login" class="fixed inset-0 bg-teal-700 flex flex-col justify-center items-center z-50 p-4">
+        <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-md w-full text-center">
+            <h1 class="text-3xl font-bold text-teal-700 mb-2">✨ PORTAL INCLUISABER</h1>
+            <p class="text-gray-500 mb-6">Plataforma de Apoio Pedagógico Municipal</p>
+            
+            <input type="text" id="input-nome-usuario" placeholder="Nome completo do aluno..." 
+                   class="w-full border-2 border-gray-300 p-3 rounded-xl text-lg text-center font-semibold mb-4 focus:outline-none focus:border-teal-500">
+            
+            <label class="block text-left text-sm font-bold text-gray-600 mb-1">Ano Letivo / Etapa:</label>
+            <select id="select-ano-escolar" class="w-full border-2 border-gray-300 p-3 rounded-xl text-lg mb-6 bg-white focus:outline-none focus:border-teal-500">
+                <option value="alfabetizacao">Fase de Alfabetização</option>
+                <option value="1ano">1° Ano - Ensino Fundamental</option>
+                <option value="3ano">3° Ano - Ensino Fundamental</option>
+                <option value="5ano">5° Ano - Ensino Fundamental</option>
+            </select>
+
+            <button onclick="fazerLogin()" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-xl text-lg shadow-md transition mb-4">
+                Iniciar Atividades 🚀
+            </button>
+
+            <button onclick="abrirPainelProfessor()" class="w-full bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 rounded-xl text-sm transition">
+                Acessar Área do Professor 🔑
+            </button>
+        </div>
+    </div>
+
+    <div id="tela-professor" class="fixed inset-0 bg-gray-900 bg-opacity-95 flex flex-col justify-center items-center z-50 p-4 hidden">
+        <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-gray-800">📝 Cadastrar Nova Atividade</h2>
+                <button onclick="fecharPainelProfessor()" class="text-gray-500 hover:text-gray-700 text-xl font-bold">✕</button>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Módulo Alvo:</label>
+                    <select id="nova-modulo" class="w-full border p-2 rounded bg-white">
+                        <option value="alfabetizacao">Alfabetização (Completar Letra)</option>
+                        <option value="moduloTEA">Módulo Clínico TEA (Cards Grandes)</option>
+                        <option value="anosIniciais">Ensino Fundamental (Multipla Escolha)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Enunciado / Comando de Voz:</label>
+                    <input type="text" id="nova-enunciado" placeholder="Ex: Clique na figura que representa a fruta..." class="w-full border p-2 rounded">
+                </div>
+                <div id="campo-exibicao">
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Palavra com Lacuna (Apenas p/ Alfabetização):</label>
+                    <input type="text" id="nova-exibicao" placeholder="Ex: B _ L A" class="w-full border p-2 rounded">
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Dica Visual (Emoji ou Letra):</label>
+                    <input type="text" id="nova-dica" placeholder="Ex: ⚽ ou B" class="w-full border p-2 rounded">
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Alternativa Correta:</label>
+                    <input type="text" id="nova-certa" placeholder="Ex: O" class="w-full border p-2 rounded">
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Outras Alternativas (Separadas por vírgula):</label>
+                    <input type="text" id="nova-opcoes" placeholder="Ex: A, E, U" class="w-full border p-2 rounded">
+                </div>
+                
+                <button onclick="salvarNovaAtividade()" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 rounded-xl transition">
+                    Salvar Exercício no Banco 💾
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="conteudo-principal" class="hidden">
+        <header class="bg-teal-700 text-white p-4 shadow-md flex justify-between items-center">
+            <h1 class="text-xl font-bold tracking-wide">🏫 PORTAL INCLUISABER - REDE MUNICIPAL</h1>
+            <div class="flex items-center gap-4">
+                <button onclick="toggleModoClean()" class="bg-orange-500 hover:bg-orange-600 font-bold py-2 px-4 rounded-full shadow transition flex items-center gap-2">
+                    🧩 <span id="btn-texto-tea">Ativar Modo Clean (TEA)</span>
+                </button>
+                <span id="nome-aluno-header" class="bg-teal-900 px-3 py-1 rounded text-sm font-bold">---</span>
+                <button onclick="location.reload()" class="bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-1 rounded font-bold">Sair</button>
+            </div>
+        </header>
+
+        <main class="max-w-6xl mx-auto p-6">
+            <section class="mb-12" id="secao-trilhas">
+                <h2 class="text-xl font-bold mb-4 text-teal-900" id="titulo-secao-modulos">Cadernos de Exercícios Disponíveis</h2>
+                <div id="container-modulos" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+            </section>
+
+            <section id="area-jogo" class="bg-white p-8 rounded-xl shadow border border-gray-200 mb-12 hidden card-interativo transition-all duration-200">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-teal-800" id="jogo-titulo">Exercício</h2>
+                    <div class="flex gap-2">
+                        <button onclick="falarEnunciado()" class="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-full text-sm font-bold">🔊 Ouvir Comando</button>
+                        <button onclick="voltarParaMenu()" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow">🔙 Mudar Caderno</button>
+                    </div>
+                </div>
+                <p class="text-xl text-center mb-6 font-semibold bg-blue-50 p-4 rounded-xl border border-blue-100" id="jogo-enunciado">Carregando...</p>
+                <div id="jogo-opcoes" class="flex flex-col items-center justify-center min-h-[220px] gap-4"></div>
+            </section>
+
+            <section class="bg-gray-900 text-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-xl font-bold mb-4 text-teal-400">📋 Painel do Profissional (Acompanhamento Detalhado)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+                    <div class="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                        <p class="text-gray-400 font-bold mb-2">👤 Dados Gerais do Aluno</p>
+                        <p><strong>Nome do Aluno:</strong> <span id="prof-nome">---</span></p>
+                        <p><strong>Turma/Ano Alocado:</strong> <span id="prof-ano-letivo" class="text-teal-300">---</span></p>
+                        <p><strong>Progresso Global:</strong> <span id="prof-estrelas" class="text-green-400 font-bold">0 ⭐</span></p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                        <p class="text-gray-400 font-bold mb-2">❌ Mapeamento de Erros por Bloco</p>
+                        <p>• Alfabetização/Base: <span id="err-ler" class="text-red-400 font-bold">0</span></p>
+                        <p>• Cadernos Iniciais: <span id="err-compreensao" class="text-red-400 font-bold">0</span></p>
+                        <p>• Módulos Clínicos TEA: <span id="err-tea" class="text-red-400 font-bold">0</span></p>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                        <p class="text-gray-400 font-bold mb-2">🔍 Lacunas Relatadas</p>
+                        <div id="prof-letras-erradas" class="flex gap-2 mt-2 flex-wrap">
+                            <span class="text-gray-500 text-xs">Nenhum desvio pedagógico reportado.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Banco de dados padrão inicial (caso não haja nada salvo no navegador)
+        const atividadesPadrao = {
+            alfabetizacao: [
+                { dica: "⚽", exibicao: "B _ L A", certa: "O", opcoes: ["A", "O", "E"], enunciado: "Complete a palavra com a vogal que falta:" }
+            ],
+            moduloTEA: [
+                { dica: "🍏", pergunta: "Qual é a maçã verde?", certa: "🍏", opcoes: ["🍎", "🍏", "🍌"], enunciado: "Toque na maçã verde:" }
+            ],
+            anosIniciais: [
+                { texto: "Pedro tinha 5 lápis e ganhou mais 3.", pergunta: "Com quantos lápis Pedro ficou?", certa: "8", opcoes: ["6", "7", "8"], enunciado: "Resolva o problema matemático:" }
+            ]
+        };
+
+        // Carrega do localStorage ou assume o padrão
+        let bancoAtividades = JSON.parse(localStorage.getItem('bancoAtividades')) || atividadesPadrao;
+
+        let alunoLogado = { nome: "", anoEscolar: "", atividadesConcluidas: 0, errosPorModulo: { alfabetizacao: 0, anosIniciais: 0, moduloTEA: 0 }, letrasMaisErradas: [] };
+        let listaAtividades = [];
+        let faseAtualIndex = 0;
+        let moduloAtual = "";
+        let modoTEAtoggled = false;
+
+        function abrirPainelProfessor() { document.getElementById('tela-professor').classList.remove('hidden'); }
+        function fecharPainelProfessor() { document.getElementById('tela-professor').classList.add('hidden'); }
+
+        function salvarNovaAtividade() {
+            const modulo = document.getElementById('nova-modulo').value;
+            const enunciado = document.getElementById('nova-enunciado').value;
+            const exibicao = document.getElementById('nova-exibicao').value;
+            const dica = document.getElementById('nova-dica').value;
+            const certa = document.getElementById('nova-certa').value;
+            const opcoesTexto = document.getElementById('nova-opcoes').value;
+
+            if(!enunciado || !certa || !opcoesTexto) return alert("Preencha os campos obrigatórios!");
+
+            const listaOpcoes = opcoesTexto.split(',').map(o => o.trim());
+            listaOpcoes.push(certa);
+            // Reordenar de forma randômica simples
+            listaOpcoes.sort(() => Math.random() - 0.5);
+
+            const novaQuestao = { enunciado, certa, dica, opcoes: listaOpcoes, exibicao, pergunta: enunciado };
+            
+            bancoAtividades[modulo].push(novaQuestao);
+            localStorage.setItem('bancoAtividades', JSON.stringify(bancoAtividades));
+            
+            alert("Atividade salva com sucesso no sistema!");
+            fecharPainelProfessor();
+        }
+
+        function fazerLogin() {
+            const nome = document.getElementById('input-nome-usuario').value.trim();
+            const ano = document.getElementById('select-ano-escolar').value;
+            if(!nome) return alert("Digite o nome do aluno!");
+
+            alunoLogado.nome = nome;
+            alunoLogado.anoEscolar = ano;
+
+            document.getElementById('nome-aluno-header').innerText = `Aluno: ${nome}`;
+            document.getElementById('tela-login').classList.add('hidden');
+            document.getElementById('conteudo-principal').classList.remove('hidden');
+            
+            atualizarPainelProfissional();
+            renderizarModulosHome();
+        }
+
+        function renderizarModulosHome() {
+            const container = document.getElementById('container-modulos');
+            container.innerHTML = '';
+            
+            if (modoTEAtoggled) {
+                document.getElementById('titulo-secao-modulos').innerText = "Trilhas Adaptadas (TEA)";
+                container.innerHTML = `
+                    <div class="bg-white p-6 rounded-xl shadow border-b-4 border-orange-500 text-center card-interativo">
+                        <h3 class="font-bold text-orange-600 text-lg mb-2">🧩 Módulo Cognitivo Clínico</h3>
+                        <p class="text-xs text-gray-500 mb-4">Estímulos visuais limpos e pareamento direto.</p>
+                        <button onclick="carregarAtividade('moduloTEA')" class="w-full bg-orange-500 text-white font-bold py-2 rounded">Abrir Caderno</button>
+                    </div>`;
+            } else {
+                document.getElementById('titulo-secao-modulos').innerText = "Módulos Recomendados";
+                if(alunoLogado.anoEscolar === 'alfabetizacao') {
+                    container.innerHTML = `
+                        <div class="bg-white p-6 rounded-xl shadow border-b-4 border-green-500 text-center card-interativo">
+                            <h3 class="font-bold text-green-600 text-lg mb-2">🔤 Alfabetização - Luz do Saber</h3>
+                            <button onclick="carregarAtividade('alfabetizacao')" class="w-full bg-green-500 text-white font-bold py-2 rounded">Iniciar</button>
+                        </div>`;
+                } else {
+                    container.innerHTML = `
+                        <div class="bg-white p-6 rounded-xl shadow border-b-4 border-blue-500 text-center card-interativo">
+                            <h3 class="font-bold text-blue-600 text-lg mb-2">📚 Ensino Fundamental Básica</h3>
+                            <button onclick="carregarAtividade('anosIniciais')" class="w-full bg-blue-500 text-white font-bold py-2 rounded">Iniciar</button>
+                        </div>`;
+                }
+            }
+        }
+
+        function toggleModoClean() {
+            document.body.classList.toggle('modo-clean');
+            modoTEAtoggled = document.body.classList.contains('modo-clean');
+            document.getElementById('btn-texto-tea').innerText = modoTEAtoggled ? "Modo Regular" : "Ativar Modo Clean (TEA)";
+            voltarParaMenu();
+        }
+
+        function voltarParaMenu() {
+            document.getElementById('area-jogo').classList.add('hidden');
+            document.getElementById('secao-trilhas').classList.remove('hidden');
+            renderizarModulosHome();
+        }
+
+        function carregarAtividade(categoria) {
+            moduloAtual = categoria;
+            faseAtualIndex = 0;
+            listaAtividades = bancoAtividades[categoria] || [];
+            
+            document.getElementById('secao-trilhas').classList.add('hidden');
+            document.getElementById('area-jogo').classList.remove('hidden');
+            renderizarFaseSaber();
+        }
+
+        function renderizarFaseSaber() {
+            const divOpcoes = document.getElementById('jogo-opcoes');
+            divOpcoes.innerHTML = '';
+
+            if (faseAtualIndex >= listaAtividades.length) {
+                document.getElementById('jogo-titulo').innerText = "Concluído! 🎉";
+                document.getElementById('jogo-enunciado').innerText = "Histórico gravado no painel da secretaria local.";
+                divOpcoes.innerHTML = `<button onclick="voltarParaMenu()" class="bg-teal-600 text-white font-bold py-2 px-6 rounded-xl">Voltar ao Menu</button>`;
+                return;
+            }
+
+            const act = listaAtividades[faseAtualIndex];
+            document.getElementById('jogo-titulo').innerText = `Exercício ${faseAtualIndex + 1} de ${listaAtividades.length}`;
+            document.getElementById('jogo-enunciado').innerText = act.enunciado || "Escolha a resposta correta:";
+
+            if (moduloAtual === 'alfabetizacao') {
+                let html = `<div class="text-6xl mb-2">${act.dica || '🔤'}</div>`;
+                html += `<div id="palavra-container" class="text-4xl font-bold tracking-widest bg-gray-50 px-4 py-2 rounded mb-4 border border-teal-400">${act.exibicao}</div>`;
+                html += `<div id="alternativas-container" class="flex gap-2">`;
+                act.opcoes.forEach(op => {
+                    html += `<button onclick="verificarLetra(this, '${op}', '${act.certa}', '${act.exibicao}')" class="bg-amber-400 text-white text-xl font-bold px-4 py-2 rounded hover:bg-amber-500 transition">${op}</button>`;
+                });
+                divOpcoes.innerHTML = html + `</div><div id="acao-proximo" class="mt-2"></div>`;
+            } else if (moduloAtual === 'moduloTEA') {
+                let html = `<div class="text-7xl mb-4 text-center">${act.dica || '🧩'}</div>`;
+                html += `<div class="grid grid-cols-3 gap-4">`;
+                act.opcoes.forEach(op => {
+                    html += `<button onclick="verificarDireto(this, '${op}', '${act.certa}')" class="bg-white border-2 p-4 rounded-xl text-3xl hover:border-teal-500 transition">${op}</button>`;
+                });
+                divOpcoes.innerHTML = html + `</div>`;
+            } else {
+                let html = "";
+                if(act.texto) html += `<div class="bg-gray-100 p-3 rounded mb-2 text-sm text-left">${act.texto}</div>`;
+                if(act.pergunta) html += `<p class="font-bold mb-3">${act.pergunta}</p>`;
+                html += `<div class="grid grid-cols-1 gap-2 w-full max-w-sm">`;
+                act.opcoes.forEach(op => {
+                    html += `<button onclick="verificarDireto(this, '${op}', '${act.certa}')" class="bg-white border p-3 rounded text-left hover:bg-teal-50 font-semibold text-gray-700 shadow-sm">${op}</button>`;
+                });
+                divOpcoes.innerHTML = html + `</div>`;
+            }
+            falarEnunciado();
+        }
+
+        function dispararAnimacaoCard(classe) {
+            const card = document.getElementById('area-jogo');
+            card.classList.remove('animar-acerto', 'animar-erro');
+            void card.offsetWidth;
+            card.classList.add(classe);
+        }
+
+        function verificarLetra(elm, escolha, certa, orig) {
+            if(escolha === certa) {
+                dispararAnimacaoCard('animar-acerto');
+                document.getElementById('palavra-container').innerText = orig.replace('_', escolha);
+                document.getElementById('alternativas-container').style.pointerEvents = 'none';
+                document.getElementById('acao-proximo').innerHTML = `<button onclick="computarAvanço(true)" class="bg-green-500 text-white px-6 py-2 rounded font-bold">Avançar ➔</button>`;
+            } else {
+                dispararAnimacaoCard('animar-erro');
+                elm.classList.add('bg-red-500', 'text-white');
+                elm.disabled = true;
+                computarAvanço(false, escolha);
+            }
+        }
+
+        function verificarDireto(elm, escolha, certa) {
+            if(escolha === certa) {
+                dispararAnimacaoCard('animar-acerto');
+                elm.classList.add('bg-green-500', 'text-white');
+                setTimeout(() => computarAvanço(true), 600);
+            } else {
+                dispararAnimacaoCard('animar-erro');
+                elm.classList.add('bg-red-500', 'text-white');
+                elm.disabled = true;
+                computarAvanço(false, escolha);
+            }
+        }
+
+        function computarAvanço(acertou, erro = "") {
+            if(acertou) {
+                alunoLogado.atividadesConcluidas++;
+                faseAtualIndex++;
+                renderizarFaseSaber();
+            } else {
+                alunoLogado.errosPorModulo[moduloAtual]++;
+                if(erro && !alunoLogado.letrasMaisErradas.includes(erro)) {
+                    alunoLogado.letrasMaisErradas.push(erro);
+                }
+            }
+            atualizarPainelProfissional();
+        }
+
+        function atualizarPainelProfissional() {
+            document.getElementById('prof-nome').innerText = alunoLogado.nome || "---";
+            document.getElementById('prof-ano-letivo').innerText = (alunoLogado.anoEscolar).toUpperCase() || "---";
+            document.getElementById('prof-estrelas').innerText = `${alunoLogado.atividadesConcluidas} ⭐`;
+            
+            document.getElementById('err-ler').innerText = alunoLogado.errosPorModulo.alfabetizacao;
+            document.getElementById('err-compreensao').innerText = alunoLogado.errosPorModulo.anosIniciais;
+            document.getElementById('err-tea').innerText = alunoLogado.errosPorModulo.moduloTEA;
+
+            const container = document.getElementById('prof-letras-erradas');
+            container.innerHTML = '';
+            if(alunoLogado.letrasMaisErradas.length === 0) {
+                container.innerHTML = `<span class="text-gray-500 text-xs">Nenhum desvio pedagógico reportado.</span>`;
+            } else {
+                alunoLogado.letrasMaisErradas.forEach(i => {
+                    container.innerHTML += `<span class="bg-red-600 text-white font-bold px-2 py-0.5 rounded text-xs mr-1 uppercase">${i}</span>`;
+                });
+            }
+        }
+
+        function falarEnunciado() {
+            if ('speechSynthesis' in window) {
+                const txt = document.getElementById('jogo-enunciado').innerText;
+                window.speechSynthesis.cancel();
+                const fala = new SpeechSynthesisUtterance(txt);
+                fala.lang = 'pt-BR';
+                window.speechSynthesis.speak(fala);
+            }
+        }
+    </script>
+</body>
+</html>
